@@ -1,0 +1,37 @@
+tarefas ao iniciar
+    gerar uma lista com todos os itens do cardápio  ----
+    mostrar mesas abertas  ----
+    listar opções de comandos
+
+
+adicionar item a mesa:
+    requer o código do produto
+    procurar na lista do cardápio o produto correspondente
+        erro caso não haja o item correspondente
+    adicionar todas as informações no arquivo da mesa
+    exibir que foi adicionado com sucesso
+
+mostrar conta da mesa:
+    abrir o arquivo da mesa
+    criar uma lista com todas as linhas
+    formatar e imprimir o código, nome e valor
+    ao final mostrar a soma de todos os itens e a soma do valor total da conta
+
+fechar mesa:
+    realiza a função mostrar conta
+    exclui o arquivo da mesa
+    retira a mesa do arquivo 'mesas_abertas'
+
+
+mesas
+    definir funções:
+        a fazer:
+            adicionar item a mesa
+            mostrar itens da mesa
+            fechar mesa
+
+
+        concluidas:
+            verificar mesas abertas
+            abrir mesa
+            exlcuir mesa
