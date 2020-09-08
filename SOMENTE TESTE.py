@@ -1,3 +1,4 @@
 from utilities import func
+from utilities import textos
 
-func.cardapio_del()
+func.mostrar_conta()

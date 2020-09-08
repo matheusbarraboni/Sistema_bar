@@ -1,6 +1,13 @@
 import os
 from utilities import textos
 
+arq_cardapio = open('cardapio', 'r')
+cardapio = []
+for i in arq_cardapio:
+    i = i.split(';')
+    cardapio.append(i[0:3])
+arq_cardapio.close()
+
 
 def soma(val):
     total = sum(map(int, val))
@@ -12,9 +19,26 @@ def remover_arquivo(nome):
     os.unlink(nome)
 
 
-def fechar_mesa(mesa=-999):
+def mostrar_conta(mesa=-999):
     if mesa == -999:
         mesa = numero_mesa()
+    a = open(str(mesa), 'r')
+    itens = []
+    soma = 0
+    for i in a:
+        itens.append(i)
+    a.close()
+    print(60 * '-')
+    print(f'{"Conta mesa ":>35}{mesa}')
+    print(60 * '-')
+    print(f'{"Quant":6}|{"Produto":^29}|{" Val unit "}|{"Val total":^11}|')
+    for i in itens:
+        i = i.split(';')
+        val_total = float(i[2]) * int(i[3])
+        soma += val_total
+        print(f'{i[3]:<4} x  {i[1]:<30}  {textos.moeda(float(i[2]))} {textos.moeda(val_total):>10}')
+    print(60*'-')
+    print(f'{"Valor total":>47} = {textos.moeda(soma)}')
 
 
 def deletar_mesa(mesa=-999):
@@ -52,7 +76,7 @@ def numero_mesa():
 def abrir_mesa(mesa=-999):
     if mesa == -999:
         mesa = numero_mesa()
-    if existe_arquivo(str(mesa)):
+    if existe_arquivo(str(mesa)) is False:
         a = open('mesas_abertas', 'a')
         a.write(f'{mesa};')
         a.close()
@@ -74,7 +98,15 @@ def add_item_mesa():
         except:
             textos.mensagem_erro('Digite um código válido!')
         else:
-            break
+            existe = False
+            for i in cardapio:
+                if cod == int(i[0]):
+                    existe = True
+                    break
+            if existe:
+                break
+            else:
+                textos.mensagem_erro('Produto não encontrado')
 
     while True:
         try:
@@ -84,10 +116,12 @@ def add_item_mesa():
         else:
             break
 
-    a = open(str(n_mesa), 'a')
-    a.write(f'{cod};{quant}\n')
-    a.close()
-    print(f'Produto adicionado com sucesso na mesa {n_mesa}')
+    for i in cardapio:
+        if cod == int(i[0]):
+            a = open(str(n_mesa), 'a')
+            a.write(f'{i[0]};{i[1]};{i[2]};{quant};\n')
+            a.close()
+            print(f'Produto adicionado com sucesso na mesa {n_mesa}')
 
 
 def mostrar_mesas():

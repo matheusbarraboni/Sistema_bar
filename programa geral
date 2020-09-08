@@ -4,34 +4,38 @@ tarefas ao iniciar
     listar opções de comandos
 
 
-adicionar item a mesa:
-    requer o código do produto
-    procurar na lista do cardápio o produto correspondente
-        erro caso não haja o item correspondente
-    adicionar todas as informações no arquivo da mesa
-    exibir que foi adicionado com sucesso
+adicionar item a mesa: ---
+    requer o código do produto ---
+    procurar na lista do cardápio o produto correspondente ---
+        erro caso não haja o item correspondente ---
+    adicionar todas as informações no arquivo da mesa ---
+    exibir que foi adicionado com sucesso ---
 
 mostrar conta da mesa:
-    abrir o arquivo da mesa
-    criar uma lista com todas as linhas
-    formatar e imprimir o código, nome e valor
-    ao final mostrar a soma de todos os itens e a soma do valor total da conta
+    abrir o arquivo da mesa ---
+    criar uma lista com todas as linhas ---
+    formatar e imprimir o código, nome e valor ---
+    ao final mostrar a soma de todos os itens e a soma do valor total da conta ---
 
 fechar mesa:
     realiza a função mostrar conta
+    pergunta qual a forma de pagamento
+    guarda a informação no arquivo 'faturamento'
     exclui o arquivo da mesa
     retira a mesa do arquivo 'mesas_abertas'
 
 
+arquivo faturamento:
+    irá possuir a informação de all os valores pagos e suas formas de pagamento
+
 mesas
     definir funções:
         a fazer:
-            adicionar item a mesa
-            mostrar itens da mesa
             fechar mesa
-
 
         concluidas:
             verificar mesas abertas
             abrir mesa
             exlcuir mesa
+            adicionar item a mesa
+            mostrar itens da mesa
