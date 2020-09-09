@@ -18,8 +18,8 @@ mostrar conta da mesa:
     ao final mostrar a soma de todos os itens e a soma do valor total da conta ---
 
 fechar mesa:
-    realiza a função mostrar conta
-    pergunta qual a forma de pagamento
+    realiza a função mostrar conta ---
+    pergunta qual a forma de pagamento ---
     guarda a informação no arquivo 'faturamento'
     exclui o arquivo da mesa
     retira a mesa do arquivo 'mesas_abertas'
@@ -27,6 +27,11 @@ fechar mesa:
 
 arquivo faturamento:
     irá possuir a informação de all os valores pagos e suas formas de pagamento
+
+
+mostrar faturamento:
+
+
 
 mesas
     definir funções:

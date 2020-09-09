@@ -19,12 +19,27 @@ def remover_arquivo(nome):
     os.unlink(nome)
 
 
+def valor_conta(mesa=-999):
+    if mesa == -999:
+        mesa = numero_mesa()
+    a = open(str(mesa), 'r')
+    soma = desconto = 0
+    for i in a:
+        i = i.split(';')
+        if i[0].isnumeric():
+            val_total = float(i[2]) * int(i[3])
+            soma += val_total
+        else:
+            desconto += float(i[1])
+    return soma - desconto
+
+
 def mostrar_conta(mesa=-999):
     if mesa == -999:
         mesa = numero_mesa()
     a = open(str(mesa), 'r')
     itens = []
-    soma = 0
+    soma = desconto = 0
     for i in a:
         itens.append(i)
     a.close()
@@ -34,11 +49,84 @@ def mostrar_conta(mesa=-999):
     print(f'{"Quant":6}|{"Produto":^29}|{" Val unit "}|{"Val total":^11}|')
     for i in itens:
         i = i.split(';')
-        val_total = float(i[2]) * int(i[3])
-        soma += val_total
-        print(f'{i[3]:<4} x  {i[1]:<30}  {textos.moeda(float(i[2]))} {textos.moeda(val_total):>10}')
+        if i[0].isnumeric():
+            val_total = float(i[2]) * int(i[3])
+            soma += val_total
+            print(f'{i[3]:<4} x  {i[1]:<30}  {textos.moeda(float(i[2]))} {textos.moeda(val_total):>10}')
+        else:
+            desconto += float(i[1])
     print(60*'-')
-    print(f'{"Valor total":>47} = {textos.moeda(soma)}')
+    print(f'{"Valor total":>47}:  {textos.moeda(soma)}')
+    if desconto != 0:
+        print(f'{"Desconto":>47}: -{textos.moeda(desconto)}')
+        print(60 * '-')
+        print(f'{"Novo total":>47}:  {textos.moeda(soma - desconto)}')
+
+
+def fechar_conta(mesa=-999):
+    if mesa == -999:
+        mesa = numero_mesa()
+    while True:
+        if existe_arquivo(str(mesa)):
+            mostrar_conta(mesa)
+            val_conta = valor_conta(mesa)
+            while True:
+                try:
+                    val_pago = float(input('Valor a ser pago  [0: valor total]\n'
+                                                            f'{"[-1: sair]":>28}    :R$'))
+                except:
+                    textos.mensagem_erro('Dígite um valor válido')
+                else:
+                    if val_pago > val_conta:
+                        textos.mensagem_erro('Valor digitado maior que o valor da conta!')
+                    elif val_pago == val_conta or val_pago == 0:
+                        pagamento(val_conta)
+                        deletar_fechar_mesa(mesa)
+                        print('Pagamento realizado com sucesso!')
+                        sair = True
+                        break
+                    elif val_pago > 0 and val_pago < val_conta:
+                        pagamento(val_pago)
+                        a = open(str(mesa), 'a')
+                        a.write(f'{"desconto"};{val_pago};\n')
+                        a.close()
+                        print('Pagamento realizado com sucesso!')
+                        resp = ''
+                        while True:
+                            resp = input('Adicionar mais um pagamento a mesa? (S/N):').lower()
+                            sair = False
+                            if resp == 'n':
+                                sair = True
+                                break
+                            elif resp == 's':
+                                break
+                            else:
+                                textos.mensagem_erro(' Valor inválido!')
+                        break
+            if sair:
+                break
+        else:
+            textos.mensagem_erro(' Mesa fechada!')
+            mesa = numero_mesa()
+
+
+def pagamento(valor):
+    while True:
+        try:
+            forma = int(input(f'Digite a forma de pagamento: [1 para dinheiro]\n'
+                              f'{"[2 para crédito]":>45}\n'
+                              f'{"[3 para débito]":>44}: '))
+        except:
+            textos.mensagem_erro('Valor inválido!')
+        else:
+            lista = [1,2,3]
+            if forma in lista:
+                a = open('faturamento', 'a')
+                a.write(f'{forma};{valor};\n')
+                a.close()
+                break
+            else:
+                textos.mensagem_erro('Opção inválida!')
 
 
 def deletar_mesa(mesa=-999):
@@ -62,6 +150,23 @@ def deletar_mesa(mesa=-999):
         print(f'Mesa {mesa} não está aberta!')
 
 
+def deletar_fechar_mesa(mesa=-999):
+    if mesa == -999:
+        mesa = numero_mesa()
+    remover_arquivo(str(mesa))
+    a = open('mesas_abertas', 'r')
+    linhas = a.readline().split(';')
+    a.close()
+    b = open('mesas_abertas', 'w')
+    cont = False
+    for i in linhas:
+        if i != str(mesa):
+            b.write(f'{i};')
+        else:
+            cont = True
+    b.close()
+
+
 def numero_mesa():
     while True:
         try:
@@ -81,7 +186,6 @@ def abrir_mesa(mesa=-999):
         a.write(f'{mesa};')
         a.close()
         b = open(str(mesa), 'a')
-        b.write('estou aberto')
         b.close()
         print(f'Mesa {mesa} aberta com sucesso!')
     else:
@@ -121,7 +225,7 @@ def add_item_mesa():
             a = open(str(n_mesa), 'a')
             a.write(f'{i[0]};{i[1]};{i[2]};{quant};\n')
             a.close()
-            print(f'Produto adicionado com sucesso na mesa {n_mesa}')
+            print(f'Produto adicionado com sucesso na mesa {n_mesa}.')
 
 
 def mostrar_mesas():

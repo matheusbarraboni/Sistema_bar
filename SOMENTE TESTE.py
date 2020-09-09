@@ -1,4 +1,4 @@
 from utilities import func
-from utilities import textos
 
-func.mostrar_conta()
+func.add_item_mesa()
+func.fechar_conta()
