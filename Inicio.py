@@ -1,8 +1,7 @@
 from utilities import func
 from utilities import textos
 
+textos.titulo('Sistema Bar', '=')
+func.mostrar_mesas()
+textos.titulo('Opções')
 
-print(60*'=')
-print(f'{"Sistema bar":^60}')
-print(60*'=')
-#  func.mostrar_mesas()

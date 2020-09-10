@@ -14,11 +14,6 @@ def soma(val):
     return total
 
 
-# remove a file from the current directory
-def remover_arquivo(nome):
-    os.unlink(nome)
-
-
 def valor_conta(mesa=-999):
     if mesa == -999:
         mesa = numero_mesa()
@@ -129,10 +124,47 @@ def pagamento(valor):
                 textos.mensagem_erro('Opção inválida!')
 
 
+def mostrar_faturamento():
+    if existe_arquivo('faturamento'):
+        print(60 * '-')
+        print(f'{"Faturamento":^60}')
+        print(60 * '-')
+        a = open('faturamento', 'r')
+        credito = s_credito = debito = s_debito = dinheiro = s_dinheiro = 0
+        for i in a:
+            i = i.split(';')
+            if i[0] == '1':
+                dinheiro += 1
+                s_dinheiro += float(i[1])
+            elif i[0] == '2':
+                credito += 1
+                s_credito += float(i[1])
+            elif i[0] == '3':
+                debito += 1
+                s_debito += float(i[1])
+        print(f'{dinheiro} pedidos pagos em dinheiro')
+        print(f'totalizando {textos.moeda(s_dinheiro)}')
+        print()
+        print(f'{credito} pedidos pagos no crédito')
+        print(f'totalizando {textos.moeda(s_credito)}')
+        print()
+        print(f'{debito} pedidos pagos no débito')
+        print(f'totalizando {textos.moeda(s_debito)}')
+        print(60 * '-')
+        print(f'Valor total faturado: {textos.moeda(s_credito + s_debito + s_dinheiro)}')
+
+
+    else:
+        print('Não há registros de faturamento.')
+
+
 def deletar_mesa(mesa=-999):
     if mesa == -999:
         mesa = numero_mesa()
-    remover_arquivo(str(mesa))
+    try:
+        os.unlink(str(mesa))
+    except:
+        textos.mensagem_erro(f' Mesa {mesa} não está aberta!')
     a = open('mesas_abertas', 'r')
     linhas = a.readline().split(';')
     a.close()
@@ -153,18 +185,19 @@ def deletar_mesa(mesa=-999):
 def deletar_fechar_mesa(mesa=-999):
     if mesa == -999:
         mesa = numero_mesa()
-    remover_arquivo(str(mesa))
-    a = open('mesas_abertas', 'r')
-    linhas = a.readline().split(';')
-    a.close()
-    b = open('mesas_abertas', 'w')
-    cont = False
-    for i in linhas:
-        if i != str(mesa):
-            b.write(f'{i};')
-        else:
-            cont = True
-    b.close()
+    try:
+        os.unlink(str(mesa))
+    except:
+        textos.mensagem_erro(f' Mesa {mesa} não está aberta!')
+    else:
+        a = open('mesas_abertas', 'r')
+        linhas = a.readline().split(';')
+        a.close()
+        b = open('mesas_abertas', 'w')
+        for i in linhas:
+            if i != str(mesa) and i != '':
+                b.write(f'{i};')
+        b.close()
 
 
 def numero_mesa():

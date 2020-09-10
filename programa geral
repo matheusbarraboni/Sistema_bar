@@ -17,26 +17,30 @@ mostrar conta da mesa:
     formatar e imprimir o código, nome e valor ---
     ao final mostrar a soma de todos os itens e a soma do valor total da conta ---
 
-fechar mesa:
+fechar mesa: ---
     realiza a função mostrar conta ---
     pergunta qual a forma de pagamento ---
-    guarda a informação no arquivo 'faturamento'
-    exclui o arquivo da mesa
-    retira a mesa do arquivo 'mesas_abertas'
+    guarda a informação no arquivo 'faturamento' ---
+    exclui o arquivo da mesa ---
+    retira a mesa do arquivo 'mesas_abertas' ---
 
 
-arquivo faturamento:
-    irá possuir a informação de all os valores pagos e suas formas de pagamento
+arquivo faturamento: ---
+    irá possuir a informação de all os valores pagos e suas formas de pagamento ---
 
 
-mostrar faturamento:
+mostrar faturamento: ---
+    separar cada forma de pagamento ---
+    mostrar a soma de todas as formas ---
+    mostrar a soma total ---
+
 
 
 
 mesas
     definir funções:
         a fazer:
-            fechar mesa
+
 
         concluidas:
             verificar mesas abertas
@@ -44,3 +48,34 @@ mesas
             exlcuir mesa
             adicionar item a mesa
             mostrar itens da mesa
+            fechar mesa
+
+
+
+------------------------------------------------------------
+                           Opções
+------------------------------------------------------------
+
+1 - Abrir Mesa
+2 - Adicionar produto a mesa
+3 - Fechar Mesa
+    1 - Ver Conta
+    2 - Adicionar pagameto
+4 - Excluir mesa
+5 - Gerenciar cardápio
+    1 - Adicionar item
+    2 - Excluir item
+    3 - Mostrar cardápio completo
+6 - Ver faturamento
+
+
+
+
+
+
+
+
+
+
+
+
