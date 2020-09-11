@@ -1,5 +1,6 @@
 import os
 from utilities import textos
+from time import sleep
 
 arq_cardapio = open('cardapio', 'r')
 cardapio = []
@@ -165,21 +166,22 @@ def deletar_mesa(mesa=-999):
         os.unlink(str(mesa))
     except:
         textos.mensagem_erro(f' Mesa {mesa} não está aberta!')
-    a = open('mesas_abertas', 'r')
-    linhas = a.readline().split(';')
-    a.close()
-    b = open('mesas_abertas', 'w')
-    cont = False
-    for i in linhas:
-        if i != str(mesa):
-            b.write(f'{i};')
-        else:
-            cont = True
-    b.close()
-    if cont:
-        print(f'Mesa {mesa} exlcuida!')
     else:
-        print(f'Mesa {mesa} não está aberta!')
+        a = open('mesas_abertas', 'r')
+        linhas = a.readline().split(';')
+        a.close()
+        b = open('mesas_abertas', 'w')
+        cont = False
+        for i in linhas:
+            if i != str(mesa) and i != '':
+                b.write(f'{i};')
+            else:
+                cont = True
+        b.close()
+        if cont:
+            print(f'Mesa {mesa} exlcuida!')
+        else:
+            print(f'Mesa {mesa} não está aberta!')
 
 
 def deletar_fechar_mesa(mesa=-999):
@@ -223,6 +225,7 @@ def abrir_mesa(mesa=-999):
         print(f'Mesa {mesa} aberta com sucesso!')
     else:
         print('Mesa já aberta!')
+        sleep(2)
 
 
 def add_item_mesa():
@@ -314,7 +317,7 @@ def cardapio_add():
             break
     while True:
         try:
-            lista[2] = float((input('Preço:')).replace(',', '.'))
+            lista[2] = float((input('Preço: R$')).replace(',', '.'))
         except:
             textos.mensagem_erro('Digite um preço válido')
         else:

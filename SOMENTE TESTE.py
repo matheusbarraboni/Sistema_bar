@@ -1,3 +1,5 @@
 from utilities import func
+from utilities import textos
 
-func.mostrar_faturamento()
+textos.colorido('Olá mundo', 'verde', 'azul')
+
