@@ -1,9 +1,18 @@
+
+Colocar cor em textos.titulo()
+Personalizar o programa com cores
+Limpar a tela ao voltar a tela principal
+pressione qualquer botão para voltar a tela principal
+
+
+
+
+
+
 tarefas ao iniciar
     gerar uma lista com todos os itens do cardápio  ----
     mostrar mesas abertas  ----
     listar opções de comandos (EM PROCESSO)
-
-    CRIAR FUNÇÃO: MOSTRAR_CARDAPIO()
 
 
 adicionar item a mesa: ---
@@ -53,15 +62,6 @@ mesas
             fechar mesa
 
 
-ERROS A SEREM ARRUMADOS:
-    Colocar delay após mensagem de erro ---
-    Colocar loop em abrir mesa caso dê erro
-    -1 em fechar conta não sai
-    adicionar modo de sair das funções
-    arrumar deletar_mesa
-
-
-
 ------------------------------------------------------------
                            Opções
 ------------------------------------------------------------
@@ -76,7 +76,7 @@ ERROS A SEREM ARRUMADOS:
     1 - Adicionar item
     2 - Excluir item
     3 - Mostrar cardápio completo
-
+6 - Ver faturamento
 
 
 
