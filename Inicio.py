@@ -2,6 +2,53 @@ from utilities import func
 from utilities import textos
 from time import sleep
 
+
+def tela3():
+    print('1 - Ver Conta\n'
+          '2 - Adicionar pagamento')
+    while True:
+        try:
+            opcoes_3[int(input('Sua opção:'))]()
+        except KeyError:
+            textos.mensagem_erro(' Digite uma opção válida!')
+        except ValueError:
+            textos.mensagem_erro(' Digite um número válido!')
+        else:
+            break
+
+def tela5():
+    print('1 - Adicionar item\n'
+          '2 - Excluir item\n'
+          '3 - Mostrar cardápio completo')
+    while True:
+        try:
+            opcoes_5[int(input('Sua opção:'))]()
+        except KeyError:
+            textos.mensagem_erro(' Digite uma opção válida!')
+        except ValueError:
+            textos.mensagem_erro(' Digite um número válido!')
+        else:
+            break
+
+
+opcoes_gerais = {
+    1: func.abrir_mesa,
+    2: func.add_item_mesa,
+    3: tela3,
+    4: func.deletar_mesa,
+    5: tela5,
+    6: func.mostrar_faturamento
+}
+opcoes_3 = {
+    1: func.mostrar_conta,
+    2: func.fechar_conta
+}
+opcoes_5 = {
+    1: func.cardapio_add,
+    2: func.cardapio_del,
+    3: func.mostrar_cardapio
+}
+
 while True:
     textos.titulo('Sistema Bar', '=')
     func.mostrar_mesas()
@@ -14,63 +61,12 @@ while True:
           f'{textos.colorido("6", "verde")} {textos.colorido("- Ver faturamento")}')
     while True:
         try:
-            opcao = int(input('Sua opção:'))
-        except:
+            opcoes_gerais[int(input('Sua opção:'))]()
+        except ValueError:
             textos.mensagem_erro(' Digite um número válido!')
+        except KeyError:
+            textos.mensagem_erro(' Opção inválida!')
         else:
-            if opcao == 1:
-                func.abrir_mesa()
-                break
-            elif opcao == 2:
-                func.add_item_mesa()
-                break
-            elif opcao == 3:
-                print('1 - Ver Conta\n'
-                      '2 - Adicionar pagamento')
-                while True:
-                    try:
-                        opcao = int(input('Sua opção:'))
-                    except:
-                        textos.mensagem_erro(' Digite um número válido!')
-                    else:
-                        if opcao == 1:
-                            func.mostrar_conta()
-                            sleep(2)
-                            break
-                        elif opcao == 2:
-                            func.fechar_conta()
-                            break
-                        else:
-                            textos.mensagem_erro(' Opção inválida!')
-                            break
-                break
-            elif opcao == 4:
-                func.deletar_mesa()
-                break
-            elif opcao == 5:
-                print('1 - Adicionar item\n'
-                      '2 - Excluir item\n'
-                      '3 - Mostrar cardápio completo')
-                while True:
-                    try:
-                        opcao = int(input('Sua opção:'))
-                    except:
-                        textos.mensagem_erro(' Digite um número válido!')
-                    else:
-                        if opcao == 1:
-                            func.cardapio_add()
-                            break
-                        elif opcao == 2:
-                            func.cardapio_del()
-                            break
-                        elif opcao == 3:
-                            func.mostrar_cardapio()
-                            sleep(2)
-                            break
-                        else:
-                            textos.mensagem_erro(' Digite uma opção válida!')
-                break
-            elif opcao == 6:
-                func.mostrar_faturamento()
-                sleep(2)
-                break
+            sleep(2)
+            break
+
