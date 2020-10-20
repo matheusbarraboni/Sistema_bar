@@ -16,6 +16,7 @@ def tela3():
         else:
             break
 
+
 def tela5():
     print('1 - Adicionar item\n'
           '2 - Excluir item\n'
@@ -69,4 +70,3 @@ while True:
         else:
             sleep(2)
             break
-

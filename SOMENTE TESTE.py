@@ -1,8 +1,42 @@
 from utilities import func
 from utilities import textos
+from tkinter import *
 
-"""import tkinter
+class Application:
+    def __init__(self, master=None):
+        self.fontePadrao = ('Arial', '10')
+        self.primeiroContainer = Frame(master)
+        self.primeiroContainer.pack()
+        self.titulo = Label(self.primeiroContainer, text='Sistema Bar')
+        self.titulo['font'] = ('Arial', '10', 'bold')
+        self.titulo.pack()
 
+        self.segundoContainer = Frame(master)
+        self.segundoContainer['width'] = 500
+        self.segundoContainer.pack(side=RIGHT)
+        self.mesas = Label(self.segundoContainer, text='Mesas abertas')
+        self.mesas['font'] = self.fontePadrao
+        self.mesas.pack(side=LEFT)
+        self.hello = Label(self.segundoContainer, text='hello')
+        self.hello.pack()
+
+        self.terceiroContainer = Frame(master)
+        self.terceiroContainer.pack(side=LEFT)
+        self.teste = Label(self.terceiroContainer, text='SEi la')
+        self.teste['font'] = self.fontePadrao
+        self.teste.pack()
+
+
+
+root = Tk()
+root.title('Sistema Bar')
+root.geometry('500x500+500+100')
+Application(root)
+root.mainloop()
+
+
+
+"""
 janela = tkinter.Tk()
 janela.title('Sistema Bar')
 janela.geometry('500x500+500+100')
@@ -18,10 +52,5 @@ btn2.pack()
 btn3 = tkinter.Button(janela, text = 'a', command=lambda: print('a'))
 btn3.pack()
 
-janela.mainloop()"""
-
-a = {
-    1: 'a'
-}
-
-print(a[3])
+janela.mainloop()
+"""
