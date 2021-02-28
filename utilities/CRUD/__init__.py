@@ -44,6 +44,7 @@ class Crud:
             INSERT INTO mesas_abertas VALUES 
             ('{numero_mesa}');
             ''')
+            self.conn.commit()
         except:
             print('Não foi possivel abrir a mesa')
         else:
@@ -58,6 +59,7 @@ class Crud:
         DELETE FROM mesas_abertas
         WHERE numero = '{numero_mesa}';
         ''')
+        self.conn.commit()
 
     
     def lerMesasAbertas(self):
@@ -77,9 +79,10 @@ class Crud:
         INSERT INTO cardapio VALUES 
         ('{cod}', '{nome}', '{preco}', '{descricao}');
         ''')
+        self.conn.commit()
     
     def lerCardapio(self):
         self.cursor.execute('''
-        SELECT * FROM cardapio;
+        SELECT * FROM cardapio
         ''')
         return self.cursor.fetchall()                
