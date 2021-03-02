@@ -37,7 +37,8 @@ class Crud:
             self.cursor.execute(f'''
             CREATE TABLE IF NOT EXISTS '{str(numero_mesa)}' (
                 cod_item int,
-                valor_pago decimal(4,2)
+                valor_pago decimal(4,2),
+                forma_pagamento tinyint
             ); 
             ''')
             self.cursor.execute(f'''
@@ -85,4 +86,59 @@ class Crud:
         self.cursor.execute('''
         SELECT * FROM cardapio
         ''')
-        return self.cursor.fetchall()                
+        return self.cursor.fetchall()
+
+
+    def deletarItemCardapio(self, cod_item):
+        self.cursor.execute(f'''
+        DELETE FROM cardapio
+        WHERE cod = '{cod_item}';
+        ''')
+        self.conn.commit()
+
+    
+    def adicionarItemMesa(self, cod_item, numero_mesa):
+        self.cursor.execute(f'''
+        INSERT INTO '{numero_mesa}' (cod_item)
+        VALUES ('{cod_item}');
+        ''')
+        self.conn.commit()
+
+
+    def deletarItemMesa(self, cod_item, numero_mesa):
+        self.cursor.execute(f'''
+        DELETE FROM '{numero_mesa}'
+        WHERE cod_item = '{cod_item}'
+        ''')
+        self.conn.commit()
+    
+
+    def lerValorConta(self, numero_mesa):
+        self.cursor.execute(f'''
+        SELECT * FROM '{numero_mesa}'
+        ''')
+        return self.cursor.fetchall()
+
+
+    def lerContaMesa(self, numero_mesa):
+        self.cursor.execute(f'''
+        SELECT (cod_item) FROM '{numero_mesa}'
+        ''')
+        relacao_itens = list()
+        for i in self.cursor.fetchall():
+            for j in i:
+                self.cursor.execute(f'''
+                SELECT * FROM CARDAPIO
+                WHERE cod = '{j}'
+                ''')
+                relacao_itens.append(self.cursor.fetchall()[0])
+        return relacao_itens
+
+    
+    def adicionarPagamento(self, numero_mesa, valor_pago, forma_pagamento):
+        self.cursor.execute(f'''
+        INSERT INTO '{numero_mesa}' (valor_pago, forma_pagamento)
+        VALUES ('{valor_pago}', '{forma_pagamento}')
+        ''')
+        self.conn.commit()
+

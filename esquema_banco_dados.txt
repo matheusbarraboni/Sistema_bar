@@ -12,11 +12,12 @@ numero int not null
 'numero_mesa'
 cod_item int
 valor_pago decimal(4,2)
+forma_pagamento tinyint
 
 
 pagamentos
-forma varchar(10) not null
-valor decimal(4,2)
+forma_pagamento varchar(10) not null
+valor_pago decimal(4,2)
 
 
 
@@ -28,12 +29,12 @@ métodos classe Crud:
 # deletarMesa
 # lerMesasAbertas
 # adicionarItemCardapio
-lerCardapio
-deletarItemCardapio
-adicionarItemMesa
-deletarItemMesa
-lerValorConta
-adicionarPagamento
+# lerCardapio
+# deletarItemCardapio
+# adicionarItemMesa
+# deletarItemMesa
+# lerContaMesa
+# adicionarPagamento
 lerFaturamento
 
 
