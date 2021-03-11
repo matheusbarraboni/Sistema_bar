@@ -1,0 +1,53 @@
+cardapio:
+cod int not null unique auto_increment
+nome varchar(40) not null
+preço decimal(4,2) not null
+drescricao text # quantidade de caracteres indefinida
+
+
+mesas:
+numero int not null
+
+
+'numero_mesa'
+cod_item int
+valor_pago decimal(4,2)
+forma_pagamento tinyint
+
+
+pagamentos
+forma_pagamento varchar(10) not null
+valor_pago decimal(4,2)
+
+
+
+
+
+métodos classe Crud:
+
+# criarMesa
+# deletarMesa
+# lerMesasAbertas
+# adicionarItemCardapio
+# lerCardapio
+# deletarItemCardapio
+# adicionarItemMesa
+# deletarItemMesa
+# lerContaMesa
+# adicionarPagamento
+lerFaturamento
+
+
+fecharConta
+mostrarConta
+
+
+
+
+métodos classe valida
+numeroMesa
+valorItem
+nomeItem
+
+
+
